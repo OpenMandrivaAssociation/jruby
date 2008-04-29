@@ -1,6 +1,6 @@
 Name:           jruby
 Version:        1.1.1
-Release:        %mkrel 0.6.2
+Release:        %mkrel 0.6.3
 Summary:        Pure Java implementation of the Ruby interpreter
 
 Group:          Development/Java
@@ -110,19 +110,19 @@ mkdir lib/ruby/site_ruby/1.8/java
 rm -rf %{buildroot}
 
 # prefix install
-install -p -d -m 755 %{buildroot}%{_libdir}/%{name}
-cp -ar samples/ %{buildroot}%{_libdir}/%{name}/ # samples
-cp -ar lib/     %{buildroot}%{_libdir}/%{name}/ # stdlib + jruby.jar
-cp -ar bin/     %{buildroot}%{_libdir}/%{name}/ # startup scripts
+install -p -d -m 755 %{buildroot}%{_datadir}/%{name}
+cp -ar samples/ %{buildroot}%{_datadir}/%{name}/ # samples
+cp -ar lib/     %{buildroot}%{_datadir}/%{name}/ # stdlib + jruby.jar
+cp -ar bin/     %{buildroot}%{_datadir}/%{name}/ # startup scripts
 
 # jar - link to prefix'd jar so that java stuff knows where to look
 install -d -m 755 %{buildroot}%{_javadir}
-ln -s %{_libdir}/%{name}/lib/%{name}.jar %{buildroot}%{_javadir}/%{name}.jar
+ln -s %{_datadir}/%{name}/lib/%{name}.jar %{buildroot}%{_javadir}/%{name}.jar
 
 # /usr prefix startup scripts
 install -d -m 755 %{buildroot}%{_bindir}
-ln -s %{_libdir}/%{name}/bin/jruby %{buildroot}%{_bindir}/jruby
-ln -s %{_libdir}/%{name}/bin/jirb  %{buildroot}%{_bindir}/jirb
+ln -s %{_datadir}/%{name}/bin/jruby %{buildroot}%{_bindir}/jruby
+ln -s %{_datadir}/%{name}/bin/jirb  %{buildroot}%{_bindir}/jirb
 
 # javadoc
 install -p -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
@@ -150,7 +150,7 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_bindir}/%{name}
 %attr(0755,root,root) %{_bindir}/jirb
 %{_javadir}/%{name}.jar
-%{_libdir}/%{name}
+%{_datadir}/%{name}
 
 
 %files javadoc
