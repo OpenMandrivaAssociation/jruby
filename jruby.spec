@@ -1,6 +1,6 @@
 Name:           jruby
 Version:        1.1.1
-Release:        %mkrel 0.6.3
+Release:        %mkrel 0.6.4
 Summary:        Pure Java implementation of the Ruby interpreter
 
 Group:          Development/Java
@@ -127,7 +127,7 @@ ln -s %{_datadir}/%{name}/bin/jirb  %{buildroot}%{_bindir}/jirb
 # javadoc
 install -p -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
 cp -a docs/api/* %{buildroot}%{_javadocdir}/%{name}-%{version}
-ln -s %{buildroot}%{_javadocdir}/%{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
+ln -s %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
 
 %check
 # Skip tests as they fail now for some weird reason -- the last test
