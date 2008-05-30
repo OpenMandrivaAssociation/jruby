@@ -1,12 +1,12 @@
 Name:           jruby
-Version:        1.1.1
-Release:        %mkrel 0.6.4
+Version:        1.1.2
+Release:        %mkrel 0.0.1
 Summary:        Pure Java implementation of the Ruby interpreter
 
 Group:          Development/Java
 License:        (CPL or GPLv2+ or LGPLv2+) and ASL 1.1 and MIT and Ruby
 URL:            http://jruby.codehaus.org/
-Source0:        http://dist.codehaus.org/jruby/jruby-src-1.1.1.tar.gz
+Source0:        http://dist.codehaus.org/jruby/jruby-src-%{version}.tar.gz
 # This patch is Fedora specific; we set up classpath using build-classpath.
 Patch1:         jruby-fix-jruby-start-script.patch
 # Temporary until upstream realizes they don't support 1.4 and scraps
@@ -45,6 +45,8 @@ Requires:       jna-posix
 Requires:       jpackage-utils >= 1.5
 Requires:       jvyamlb
 Requires:       asm3
+Requires:       jline
+Requires:       joni
 
 %description
 JRuby is an 100% pure-Java implementation of the Ruby programming
@@ -142,11 +144,8 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc COPYING COPYING.CPL COPYING.GPL COPYING.LGPL
-%doc docs/BeanScriptingFramework docs/CodeConventions.txt
-%doc docs/Glossary.txt docs/Javasupport-highlevel.txt
-%doc docs/Javasupport-lowlevel.txt docs/Javasupport-overview.txt
-%doc docs/README.test docs/release-checklist.txt
-
+%doc docs/CodeConventions.txt
+%doc docs/README.test 
 %attr(0755,root,root) %{_bindir}/%{name}
 %attr(0755,root,root) %{_bindir}/jirb
 %{_javadir}/%{name}.jar
