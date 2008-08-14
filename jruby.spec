@@ -1,6 +1,6 @@
 Name:           jruby
-Version:        1.1.2
-Release:        %mkrel 3.0.2
+Version:        1.1.3
+Release:        %mkrel 0.2.1
 Summary:        Pure Java implementation of the Ruby interpreter
 
 Group:          Development/Java
@@ -15,11 +15,8 @@ Patch2:         jruby-remove-retroweaver-task.patch
 # Disagreements with upstream. They want to bundle binary dependencies
 # into jruby's jar; we don't.
 Patch3:         jruby-dont-include-dependencies-in-jar.patch
-# Assuming we want to run the tests.
-Patch5:         jruby-add-classpath-for-tests.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:      noarch
-ExcludeArch:    ppc ppc64
 
 BuildRequires:  ant >= 1.6
 BuildRequires:  ant-junit >= 1.6
@@ -74,9 +71,6 @@ Javadoc for %{name}.
 %patch1 -p0
 %patch2 -p0
 %patch3 -p0
-%patch5 -p0
-
-cp build.xml build.xml.orig
 
 # delete binary .jars.
 rm -f build_lib/*.jar
