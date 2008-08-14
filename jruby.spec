@@ -1,6 +1,6 @@
 Name:           jruby
 Version:        1.1.3
-Release:        %mkrel 0.2.1
+Release:        %mkrel 0.2.2
 Summary:        Pure Java implementation of the Ruby interpreter
 
 Group:          Development/Java
