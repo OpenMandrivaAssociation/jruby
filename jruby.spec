@@ -33,6 +33,7 @@ BuildRequires:  junit
 BuildRequires:  jvyamlb
 BuildRequires:  objectweb-asm
 BuildRequires:  ruby
+BuildRequires:  asm3
 
 Requires:       bcel
 Requires:       bsf
