@@ -1,6 +1,6 @@
 Name:           jruby
-Version:        1.1.3
-Release:        %mkrel 0.2.2
+Version:        1.1.6
+Release:        %mkrel 0.1.0
 Summary:        Pure Java implementation of the Ruby interpreter
 
 Group:          Development/Java
@@ -31,7 +31,8 @@ BuildRequires:  joni
 BuildRequires:  jpackage-utils >= 1.5
 BuildRequires:  junit
 BuildRequires:  jvyamlb
-BuildRequires:  asm3
+BuildRequires:  objectweb-asm
+BuildRequires:  ruby
 
 Requires:       bcel
 Requires:       bsf
@@ -139,7 +140,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc COPYING COPYING.CPL COPYING.GPL COPYING.LGPL
 %doc docs/CodeConventions.txt
-%doc docs/README.test 
+%doc docs/README.test
 %attr(0755,root,root) %{_bindir}/%{name}
 %attr(0755,root,root) %{_bindir}/jirb
 %{_javadir}/%{name}.jar
