@@ -1,2 +1,3 @@
 sources:
-  "jruby-src-1.1.6.tar.gz:"	3efca7cdb4cc4c82c9d32883a404a87affce67b6
+  jruby-src-1.7.2.tar.gz: 63ad35f735c4dd9b53a74a95e8e7cfd9a3cc5909
+  olabini-yecht-0.0.2-0-g6009fd7.tar.gz: e07ba337dee38ad6f71fdd8ed2b20adbd0eab378

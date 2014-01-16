@@ -1,0 +1,26 @@
+From 80a67f0564f43c979bba6115832128c931173349 Mon Sep 17 00:00:00 2001
+From: Isaiah Peng <issaria@gmail.com>
+Date: Sun, 24 Mar 2013 11:03:57 +0100
+Subject: [PATCH] Fix gh-601 ant DSL should support parameter hash with symbol
+ keys
+
+---
+ lib/ruby/shared/ant/element.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/ruby/shared/ant/element.rb b/lib/ruby/shared/ant/element.rb
+index 32dd2cb..e5fe167 100644
+--- a/lib/ruby/shared/ant/element.rb
++++ b/lib/ruby/shared/ant/element.rb
+@@ -74,7 +74,7 @@ def create_element(parent) # See ProjectHelper2.ElementHandler
+     def assign_attributes(instance, args)
+       wrapper = RuntimeConfigurable.new instance, instance.task_name
+       args.each do |key, value|
+-        wrapper.set_attribute key, @ant.project.replace_properties(to_string(value))
++        wrapper.set_attribute to_string(key), @ant.project.replace_properties(to_string(value))
+       end
+     end
+ 
+-- 
+1.8.1.6
+

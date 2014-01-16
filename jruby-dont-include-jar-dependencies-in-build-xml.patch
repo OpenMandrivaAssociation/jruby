@@ -1,0 +1,52 @@
+--- build.xml.orig	2012-08-07 09:24:18.000000000 +0200
++++ build.xml	2012-09-04 11:53:49.018300253 +0200
+@@ -342,48 +342,7 @@
+         <echo file="${lib.dir}/native/libs.OK"/>
+     </target>
+ 
+-    <property name="jruby.jar.zip.includes" value="
+-          ${asm.jar}
+-          ${asm.commons.jar}
+-          ${asm.util.jar}
+-          ${asm.analysis.jar}
+-          ${asm.tree.jar}
+-          bytelist.jar
+-          jnr-constants.jar
+-          jline-${jline.version}.jar
+-          jcodings.jar
+-          joni.jar
+-          jnr-netdb.jar
+-          jnr-posix.jar
+-          jnr-x86asm.jar
+-          jnr-ffi.jar
+-          jnr-enxio.jar
+-          jnr-unixsocket.jar
+-          jffi.jar
+-          jffi-i386-Linux.jar
+-          jffi-x86_64-Linux.jar
+-          jffi-Darwin.jar
+-          jffi-i386-SunOS.jar
+-          jffi-x86_64-SunOS.jar
+-          jffi-ppc-AIX.jar
+-          jffi-ppc-Linux.jar
+-          jffi-ppc64-Linux.jar
+-          jffi-sparc-SunOS.jar
+-          jffi-sparcv9-SunOS.jar
+-          jffi-i386-FreeBSD.jar
+-          jffi-x86_64-FreeBSD.jar
+-          jffi-i386-OpenBSD.jar
+-          jffi-x86_64-OpenBSD.jar
+-          jffi-i386-Windows.jar
+-          jffi-x86_64-Windows.jar
+-          jffi-s390x-Linux.jar
+-          joda-time-${joda.time.version}.jar
+-          snakeyaml-1.11.jar
+-          yecht.jar
+-          yydebug.jar
+-          nailgun-0.7.1.jar
+-          jzlib-1.1.0.jar
+-          invokebinder.jar"/>
++    <property name="jruby.jar.zip.includes" value="cant_leave_this_blank_because_all_files_would_be_used"/>
+ 
+     <target name="jar-jruby" depends="init, compile, unzip-native-libs" unless="jar-up-to-date, jar-jruby.hasrun">
+         <jar destfile="${lib.dir}/jruby.jar" compress="true" index="true" update="true">

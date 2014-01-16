@@ -1,0 +1,22 @@
+--- bin/jruby.bash.orig	2012-10-04 08:32:06.000000000 +0200
++++ bin/jruby.bash	2012-10-04 08:36:28.936261891 +0200
+@@ -305,7 +305,7 @@
+ # Put the ruby_args back into the position arguments $1, $2 etc
+ set -- "${ruby_args[@]}"
+ 
+-JAVA_OPTS="$JAVA_OPTS $JAVA_MEM $JAVA_MEM_MIN $JAVA_STACK"
++JAVA_OPTS="$FEDORA_JAVA_OPTS $JAVA_OPTS $JAVA_MEM $JAVA_MEM_MIN $JAVA_STACK"
+ 
+ JFFI_BOOT=""
+ if [ -d "$JRUBY_HOME/lib/native/" ]; then
+--- bin/jruby.sh.orig	2012-10-04 08:32:06.000000000 +0200
++++ bin/jruby.sh	2012-10-04 08:36:38.052228561 +0200
+@@ -253,7 +253,7 @@
+ # Put the ruby_args back into the position arguments $1, $2 etc
+ set -- "${ruby_args}"
+ 
+-JAVA_OPTS="$JAVA_OPTS $JAVA_VM $JAVA_MEM $JAVA_STACK"
++JAVA_OPTS="$FEDORA_JAVA_OPTS $JAVA_OPTS $JAVA_VM $JAVA_MEM $JAVA_STACK"
+ 
+ JFFI_BOOT=""
+ if [ -d "$JRUBY_HOME/lib/native/" ]; then

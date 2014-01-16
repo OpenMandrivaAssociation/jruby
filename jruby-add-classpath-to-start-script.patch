@@ -1,0 +1,33 @@
+--- bin/jruby.sh.orig	2011-05-25 23:01:16.000000000 -0400
++++ bin/jruby.sh	2011-05-25 23:02:32.000000000 -0400
+@@ -107,6 +107,13 @@ for j in "$JRUBY_HOME"/lib/jruby.jar "$J
+     JRUBY_ALREADY_ADDED=true
+ done
+ 
++j=$(build-classpath objectweb-asm4/asm objectweb-asm4/asm-util \
++    objectweb-asm4/all objectweb-asm4/asm-commons objectweb-asm4/asm-analysis objectweb-asm4/asm-tree bcmail bcprov bsf bytelist \
++    felix/org.osgi.core invokebinder jansi jcodings jffi jline2 jna jnr-constants jnr-enxio jnr-ffi jnr-netdb jnr-posix jnr-unixsocket \
++    joda-time joni jzlib nailgun snakeyaml yydebug yecht jruby jruby-yecht 2>/dev/null)
++
++JRUBY_CP="$JRUBY_CP$CP_DELIMETER$j"
++
+ 
+ # ----- Set Up The System Classpath -------------------------------------------
+ 
+--- bin/jruby.bash.orig	2011-06-02 10:13:58.158447113 -0400
++++ bin/jruby.bash	2011-06-02 10:14:44.679447018 -0400
+@@ -150,6 +150,14 @@ if $cygwin; then
+     JRUBY_CP=`cygpath -p -w "$JRUBY_CP"`
+ fi
+ 
++j=$(build-classpath objectweb-asm4/asm objectweb-asm4/asm-util \
++    objectweb-asm4/all objectweb-asm4/asm-commons objectweb-asm4/asm-analysis objectweb-asm4/asm-tree bcmail bcprov bsf bytelist \
++    felix/org.osgi.core invokebinder jansi jcodings jffi jline2 jna jnr-constants jnr-enxio jnr-ffi jnr-netdb jnr-posix jnr-unixsocket \
++    joda-time joni jzlib nailgun snakeyaml yydebug yecht jruby jruby-yecht 2>/dev/null)
++
++JRUBY_CP="$JRUBY_CP$CP_DELIMETER$j"
++
++
+ # ----- Set Up The System Classpath -------------------------------------------
+ 
+ if [ "$JRUBY_PARENT_CLASSPATH" != "" ]; then

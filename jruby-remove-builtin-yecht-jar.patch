@@ -1,0 +1,11 @@
+--- src/org/jruby/Ruby.java.orig	2012-08-07 09:24:18.000000000 +0200
++++ src/org/jruby/Ruby.java	2012-09-04 12:04:26.348906376 +0200
+@@ -1589,7 +1589,7 @@
+         addLazyBuiltin("tempfile.rb", "tempfile", "org.jruby.ext.tempfile.TempfileLibrary");
+         addLazyBuiltin("fcntl.rb", "fcntl", "org.jruby.ext.fcntl.FcntlLibrary");
+         addLazyBuiltin("rubinius.jar", "rubinius", "org.jruby.ext.rubinius.RubiniusLibrary");
+-        addLazyBuiltin("yecht.jar", "yecht", "YechtService");
++        addLazyBuiltin("jruby-yecht.jar", "yecht", "YechtService");
+
+         if (is1_9()) {
+             addLazyBuiltin("mathn/complex.jar", "mathn/complex", "org.jruby.ext.mathn.Complex");

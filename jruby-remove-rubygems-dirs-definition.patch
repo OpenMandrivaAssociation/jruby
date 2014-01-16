@@ -1,0 +1,28 @@
+--- rubygems/defaults/jruby.rb.orig	2012-10-04 14:00:24.527540649 +0200
++++ rubygems/defaults/jruby.rb	2012-10-04 14:01:00.880408183 +0200
+@@ -22,25 +22,6 @@
+     end
+   end
+ 
+-  # Default home directory path to be used if an alternate value is not
+-  # specified in the environment.
+-  #
+-  # JRuby: We don't want gems installed in lib/jruby/gems, but rather
+-  # to preserve the old location: lib/ruby/gems.
+-  def self.default_dir
+-    dir = RbConfig::CONFIG["default_gem_home"]
+-    dir ||= File.join(ConfigMap[:libdir], 'ruby', 'gems', 'shared')
+-    dir
+-  end
+-
+-  # Default locations for RubyGems' .rb and bin files
+-  def self.default_rubygems_dirs
+-    [
+-        File.join(ConfigMap[:libdir], 'ruby', 'shared'),
+-        ConfigMap[:bindir]
+-    ]
+-  end
+-
+   ##
+   # Is this a windows platform?
+   #

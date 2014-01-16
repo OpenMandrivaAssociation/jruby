@@ -1,0 +1,7 @@
+%jruby_libdir %{_datadir}/jruby/lib/ruby/1.9
+
+# This is the general location for libs/archs compatible with all
+# or most of the Ruby versions available in the Fedora repositories.
+%jruby_vendordir vendor_ruby
+%jruby_vendorlibdir %{jruby_libdir}/%{jruby_vendordir}
+%jruby_vendorarchdir %{jruby_vendorlibdir}
