@@ -183,7 +183,9 @@ Requires:  yydebug
 # Other Requires
 Requires:  jpackage-utils
 Requires:  rubygems
+%if 0%{?fedora}
 Requires:  rubypick
+%endif
 
 Provides:  ruby(release) = 1.9.1
 Provides:  ruby(release) = 1.8
