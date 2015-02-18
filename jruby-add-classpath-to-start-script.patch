@@ -4,12 +4,12 @@
      JRUBY_ALREADY_ADDED=true
  done
  
-+j=$(build-classpath objectweb-asm4/asm objectweb-asm4/asm-util \
-+    objectweb-asm4/all objectweb-asm4/asm-commons objectweb-asm4/asm-analysis objectweb-asm4/asm-tree bcmail bcprov bsf bytelist \
-+    felix/org.osgi.core invokebinder jansi jcodings jffi jline2 jna jnr-constants jnr-enxio jnr-ffi jnr-netdb jnr-posix jnr-unixsocket \
++j=$(build-classpath objectweb-asm/asm objectweb-asm/asm-util \
++    objectweb-asm/all objectweb-asm/asm-commons objectweb-asm/asm-analysis objectweb-asm/asm-tree bcmail bcprov bsf bytelist \
++    felix/org.osgi.core invokebinder jansi jcodings jffi jline jna jnr-constants jnr-enxio jnr-ffi jnr-netdb jnr-posix jnr-unixsocket \
 +    joda-time joni jzlib nailgun snakeyaml yydebug yecht jruby jruby-yecht 2>/dev/null)
 +
-+JRUBY_CP="$JRUBY_CP$CP_DELIMETER$j"
++JRUBY_CP="$JRUBY_CP$CP_DELIMITER$j"
 +
  
  # ----- Set Up The System Classpath -------------------------------------------
@@ -20,12 +20,12 @@
      JRUBY_CP=`cygpath -p -w "$JRUBY_CP"`
  fi
  
-+j=$(build-classpath objectweb-asm4/asm objectweb-asm4/asm-util \
-+    objectweb-asm4/all objectweb-asm4/asm-commons objectweb-asm4/asm-analysis objectweb-asm4/asm-tree bcmail bcprov bsf bytelist \
-+    felix/org.osgi.core invokebinder jansi jcodings jffi jline2 jna jnr-constants jnr-enxio jnr-ffi jnr-netdb jnr-posix jnr-unixsocket \
++j=$(build-classpath objectweb-asm/asm objectweb-asm/asm-util \
++    objectweb-asm/all objectweb-asm/asm-commons objectweb-asm/asm-analysis objectweb-asm/asm-tree bcmail bcprov bsf bytelist \
++    felix/org.osgi.core invokebinder jansi jcodings jffi jline jna jnr-constants jnr-enxio jnr-ffi jnr-netdb jnr-posix jnr-unixsocket \
 +    joda-time joni jzlib nailgun snakeyaml yydebug yecht jruby jruby-yecht 2>/dev/null)
 +
-+JRUBY_CP="$JRUBY_CP$CP_DELIMETER$j"
++JRUBY_CP="$JRUBY_CP$CP_DELIMITER$j"
 +
 +
  # ----- Set Up The System Classpath -------------------------------------------

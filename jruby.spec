@@ -4,6 +4,9 @@
 # rpm4 vs rpm5 exclude semantics...
 %global _unpackaged_files_terminate_build 0
 %endif
+
+%define debug_package %{nil}
+
 %global jruby_vendordir %{_datadir}/%{name}/lib
 %global jruby_sitedir %{_prefix}/local/share/%{name}/lib
 %global rubygems_dir %{_datadir}/rubygems
@@ -13,15 +16,15 @@
 %global yecht_cluster olabini
 
 #%%global preminorver dev
-%global release 5
-%global enable_check 1
+%global release 6
+%global enable_check 0
 
 %global jar_deps \\\
-     objectweb-asm4/asm \\\
-     objectweb-asm4/asm-analysis \\\
-     objectweb-asm4/asm-commons \\\
-     objectweb-asm4/asm-tree \\\
-     objectweb-asm4/asm-util \\\
+     objectweb-asm/asm \\\
+     objectweb-asm/asm-analysis \\\
+     objectweb-asm/asm-commons \\\
+     objectweb-asm/asm-tree \\\
+     objectweb-asm/asm-util \\\
      bcprov \\\
      bcmail \\\
      bsf \\\
@@ -33,7 +36,7 @@
      jarjar \\\
      jcodings \\\
      jffi \\\
-     jline2 \\\
+     jline \\\
      jna \\\
      jnr-constants \\\
      jnr-enxio \\\
@@ -44,7 +47,6 @@
      joda-time \\\
      joni \\\
      junit \\\
-     junit4 \\\
      jzlib \\\
      nailgun \\\
      felix/org.osgi.core \\\
@@ -54,57 +56,34 @@
 
 
 Name:           jruby
-Version:        1.7.2
-Release:        %{?preminorver:0.}%{release}%{?preminorver:.%{preminorver}}.0%{?dist}
+Version:        1.7.19
+Release:        %{?preminorver:0.}%{release}%{?preminorver:.%{preminorver}}%{?dist}.1
 Summary:        Pure Java implementation of the Ruby interpreter
-
+Group:          Development/Ruby
 # (CPL or GPLv2+ or LGPLv2+) - JRuby itself
 # BSD - some files under lib/ruby/shared
 # (GPLv2 or Ruby) - Ruby 1.8 stdlib
 # (BSD or Ruby) - Ruby 1.9 stdlib
 License:        (CPL or GPLv2+ or LGPLv2+) and BSD and (GPLv2 or Ruby) and (BSD or Ruby)
 URL:            http://jruby.org/
-BuildArch:      noarch
 %if 0%{?preminorver:1}
 Source0:        https://github.com/downloads/%{name}/%{name}/%{name}-src-%{version}.%{preminorver}.tar.gz
 %else
 Source0:        http://jruby.org.s3.amazonaws.com/downloads/%{version}/%{name}-src-%{version}.tar.gz
 %endif
 Source1:        http://github.com/%{yecht_cluster}/yecht/tarball/0.0.2/%{yecht_cluster}-yecht-%{yecht_dlversion}.tar.gz
-%if 0%{?fedora}
-%else
-# rpm5 cannot handle heredoc in spec
-Source100:      macros.jruby
-%endif
+Source100:	jruby.rpmlintrc
 ### Patches for JRuby itself
 # Adds $FEDORA_JAVA_OPTS, that is dynamically replaced by Fedora specific paths from the specfile
 # This way we can use macros for the actual locations and not hardcode them in the patch
 Patch0:         jruby-executable-add-fedora-java-opts-stub.patch
 # Adds all the required jars to boot classpath
 Patch1:         jruby-add-classpath-to-start-script.patch
-# Following to patches make sure that we bundle no jars
-Patch2:         jruby-dont-include-jar-dependencies-in-build-xml.patch
-Patch3:         jruby-no-jar-bundling.patch
-# this patch contained the following upstream change
-# https://github.com/jruby/jruby/commit/6c1d41aedfde705c969abf10cf5384e2be69f10a
-# -- now it changes the change to be ok downstream :)
-Patch4:         jruby-remove-builtin-yecht-jar.patch
 # We only want to build bindings, yecht is a package on its own
 Patch5:         jruby-yecht-only-build-bindings.patch
 # We don't want any directories defined by JRuby, everything is taken from Fedora's rubygems
 Patch6:         jruby-remove-rubygems-dirs-definition.patch
-# Fix Ant compatibility.
-# https://github.com/jruby/jruby/issues/601
-Patch7:         jruby-1.7.4-DSL-should-support-parameter-hash-with-symbol-keys.patch
-
-### Patches for tests
-# UDP multicast test hangs
-# http://jira.codehaus.org/browse/JRUBY-6758
-Patch100:         jruby-skip-network-tests.patch
-# Fedora has different name for jarjar.jar => downstream only
-Patch101:         jruby-remove-version-from-jarjar-jar-in-specs.patch
-# https://github.com/jruby/jruby/pull/551/files
-Patch102:         jruby-raise-written-chunk-in-spec-to-block.patch
+Patch7:         jruby-uncomment-properties.patch
 
 BuildRequires:  ant >= 1.6
 BuildRequires:  ant-junit
@@ -121,7 +100,7 @@ BuildRequires:  felix-osgi-core >= 1.4.0
 BuildRequires:  invokebinder
 BuildRequires:  jansi
 BuildRequires:  jarjar
-BuildRequires:  jline2 >= 2.7
+BuildRequires:  jline >= 2.7
 BuildRequires:  jffi >= 1.0.10
 BuildRequires:  jna
 BuildRequires:  jnr-constants
@@ -133,10 +112,10 @@ BuildRequires:  jnr-unixsocket
 BuildRequires:  jzlib
 BuildRequires:  joda-time
 BuildRequires:  joni >= 1.1.2
-BuildRequires:  junit4
+BuildRequires:  junit
 BuildRequires:  jzlib
 BuildRequires:  nailgun
-BuildRequires:  objectweb-asm4
+BuildRequires:  objectweb-asm
 BuildRequires:  snakeyaml
 BuildRequires:  yydebug
 BuildRequires:  yecht
@@ -176,16 +155,14 @@ Requires:  joni >= 1.1.2
 Requires:  jruby-yecht
 Requires:  jzlib
 Requires:  nailgun
-Requires:  objectweb-asm4
+Requires:  objectweb-asm
 Requires:  snakeyaml
 Requires:  yydebug
 
 # Other Requires
 Requires:  jpackage-utils
 Requires:  rubygems
-%if 0%{?fedora}
 Requires:  rubypick
-%endif
 
 Provides:  ruby(release) = 1.9.1
 Provides:  ruby(release) = 1.8
@@ -200,7 +177,7 @@ Standard Libraries.
 
 %package        javadoc
 Summary:        Javadoc for %{name}
-
+Group:          Documentation
 Requires:       %{name} = %{version}-%{release}
 
 %description    javadoc
@@ -211,7 +188,7 @@ Javadoc for %{name}.
 %package        yecht
 Summary:        Bindings used to load yecht in jruby
 License:        MIT
-
+Group:          Development/Ruby
 BuildRequires:  yecht
 Requires:       yecht
 Requires:       %{name} = %{version}-%{release}
@@ -221,7 +198,7 @@ The bindings for the yecht library for internal use in jruby
 
 %package        devel
 Summary:        JRuby development environment
-
+Group:          Development/Ruby
 Requires:       jruby
 Requires:       jpackage-utils
 
@@ -233,14 +210,7 @@ Macros for building JRuby-specific libraries.
 
 %patch0 -p0
 %patch1 -p0
-%patch2 -p0
-%patch3 -p0
-%patch4 -p0
-%patch7 -p1
-
-%patch100 -p0
-%patch101 -p0
-%patch102 -p1
+%patch7 -p0
 
 tar xzvf %{SOURCE1}
 mv %{yecht_cluster}-yecht-%{yecht_commitversion} yecht
@@ -259,10 +229,10 @@ find -name .cvsignore -exec rm -f '{}' \;
 # replace them with symlinks
 # these sorted to able to check them against new releases easily
 # don't forget to also change these in jruby-add-classpath-to-start-script.patch
-build-jar-repository -s -p build_lib %{jar_deps}
+build-jar-repository -s -p lib %{jar_deps}
 
 # required as jruby was shipping the core java tools jar
-ln -s %{_prefix}/lib/jvm/java/lib/tools.jar build_lib/apt-mirror-api.jar
+ln -s %{_prefix}/lib/jvm/java/lib/tools.jar lib/apt-mirror-api.jar
 
 # remove hidden .document files
 find lib/ruby/ -name '*.document' -exec rm -f '{}' \;
@@ -319,22 +289,17 @@ pushd %{buildroot}%{rubygems_dir}
 patch -p0 < %{PATCH6}
 popd
 
-%if 0%{?fedora}
 # Dump the macros into macros.jruby to use them to build other JRuby libraries.
-#mkdir -p %{buildroot}%{_sysconfdir}/rpm
-#cat >> %{buildroot}%{_sysconfdir}/rpm/macros.jruby << \EOF
-#%#%jruby_libdir %%{_datadir}/%{name}/lib/ruby/1.9
-#
-## This is the general location for libs/archs compatible with all
-## or most of the Ruby versions available in the Fedora repositories.
-#%#%jruby_vendordir vendor_ruby
-#%#%jruby_vendorlibdir %%{jruby_libdir}/%%{jruby_vendordir}
-#%#%jruby_vendorarchdir %%{jruby_vendorlibdir}
-#EOF
-%else
-mkdir -p %{buildroot}%{_sysconfdir}/rpm/macros.d
-install -p -m644 %{SOURCE100} %{buildroot}%{_sysconfdir}/rpm/macros.d
-%endif
+mkdir -p %{buildroot}%{_sysconfdir}/rpm
+cat >> %{buildroot}%{_sysconfdir}/rpm/macros.jruby << \EOF
+%%jruby_libdir %%{_datadir}/%{name}/lib/ruby/1.9
+
+# This is the general location for libs/archs compatible with all
+# or most of the Ruby versions available in the Fedora repositories.
+%%jruby_vendordir vendor_ruby
+%%jruby_vendorlibdir %%{jruby_libdir}/%%{jruby_vendordir}
+%%jruby_vendorarchdir %%{jruby_vendorlibdir}
+EOF
 
 # javadoc
 install -p -d -m 755 %{buildroot}%{_javadocdir}/%{name}
@@ -356,18 +321,13 @@ cp -a pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{name}-shared.pom
 cp -a maven/jruby/pom.xml $RPM_BUILD_ROOT%{_mavenpomdir}/JPP-%{name}.pom
 %add_maven_depmap JPP-%{name}.pom %{name}.jar
 
-# Remove copied bouncycastle jars
-rm %{buildroot}%{_datadir}/%{name}/lib/ruby/shared/bc*.jar
-
-%if 0
 %check
 %if 0%{?enable_check}
-cp yecht/lib/yecht-ruby-0.0.2.jar build_lib/%{name}-yecht.jar
-cp lib/%{name}.jar build_lib/%{name}.jar
+cp yecht/lib/yecht-ruby-0.0.2.jar lib/%{name}-yecht.jar
 # explicitly set path to jruby.jar and jruby-yecht.jar, as they can't found by "build-classpath" used in bin/jruby
-export JRUBY_CP=$(pwd)/build_lib/jruby.jar:$(pwd)/build_lib/jruby-yecht.jar
+export JRUBY_CP=$(pwd)/lib/jruby.jar:$(pwd)/lib/jruby-yecht.jar
 # some tests are not run via bin/jruby, so we have to specify CLASSPATH explictly for them to work
-export CLASSPATH=$(build-classpath %{jar_deps}):$(pwd)/build_lib/jruby.jar:$(pwd)/build_lib/jruby-yecht.jar
+export CLASSPATH=$(build-classpath %{jar_deps}):$(pwd)/lib/jruby.jar:$(pwd)/lib/jruby-yecht.jar
 # make sure that we don't install jruby-launcher, as it will first need to be patched upstream
 # to be able to find unbundled jars
 sed -i 's|depends="install-dev-gems,install-jruby-launcher-gem"|depends="install-dev-gems"|' build.xml
@@ -377,27 +337,18 @@ sed -i 's|depends="install-dev-gems,install-jruby-launcher-gem"|depends="install
 sed -i 's|test_loading_compiled_ruby_class_from_jar|test_loading_compiled_ruby_class_from_jar\nreturn|' test/test_load_compiled_ruby_class_from_classpath.rb
 
 export LANG=en_US.utf8
-%if 0%{?fedora}
 ant test
-%else
-# FIXME for OpenMandriva
-# 954 tests, 15955 assertions, 1 failures, 0 errors
-ant test
-%endif
-%endif
 %endif
 
 %files -f .mfiles
 %doc COPYING LICENSE.RUBY
-%doc docs/CodeConventions.txt docs/README.test
+%doc docs/CodeConventions.txt docs/README.*
 
 %{_bindir}/%{name}
 %{_bindir}/gem-jruby
 %{_bindir}/irb-jruby
 %{_datadir}/%{name}
 # exclude bundled gems
-%exclude %{jruby_vendordir}/ruby/1.9/json*
-%exclude %{jruby_vendordir}/ruby/1.9/rdoc*
 %exclude %{jruby_vendordir}/ruby/1.9/rake*
 %exclude %{jruby_vendordir}/ruby/gems
 # exclude all of the rubygems stuff
@@ -405,11 +356,8 @@ ant test
 %exclude %{jruby_vendordir}/ruby/shared/rbconfig
 # own the JRuby specific files under RubyGems dir
 %{rubygems_dir}/rubygems/defaults/jruby.rb
-%if 0%{?fedora}
 # exclude jruby_native.rb that erroneously ended up in .dev tarball
 %exclude %{rubygems_dir}/rubygems/defaults/jruby_native.rb
-%endif
-%{_javadir}/%{name}.jar
 
 %files javadoc
 %doc COPYING LICENSE.RUBY
@@ -422,13 +370,12 @@ ant test
 %{_javadir}/%{name}-yecht.jar
 
 %files devel
-%if 0%{?fedora}
 %config(noreplace) %{_sysconfdir}/rpm/macros.jruby
-%else
-%config(noreplace) %{_sysconfdir}/rpm/macros.d/macros.jruby
-%endif
 
 %changelog
+* Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.7.2-6.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Thu Aug 22 2013 Vít Ondruch <vondruch@redhat.com> - 1.7.2-5
 - Use relative symlinks for compatibility with recent Java packaging macros.
 - Fix Ant compatibility.

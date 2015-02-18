@@ -40,6 +40,6 @@ diff -supr default.build.properties.orig ./default.build.properties
  ruby.src.dir=ext/ruby/src/java
 -jruby.lib=../jruby/lib
 +jruby.lib=../lib
-+build_lib=../build_lib
++build_lib=../lib
 Only in ../../../yecht/olabini-yecht-157cf13/lib: yecht-0.0.2.jar
 Only in ./lib: yecht-ruby-0.0.2.jar
