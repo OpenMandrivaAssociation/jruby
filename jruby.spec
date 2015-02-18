@@ -163,12 +163,9 @@ Requires:  yydebug
 # Other Requires
 Requires:  jpackage-utils
 Requires:  rubygems
-Requires:  rubypick
 
 Provides:  ruby(release) = 1.9.1
 Provides:  ruby(release) = 1.8
-# For rubypick
-Provides:  ruby(runtime_executable)
 
 %description
 JRuby is a 100% Java implementation of the Ruby programming language.
