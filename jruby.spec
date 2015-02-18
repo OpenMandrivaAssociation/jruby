@@ -119,6 +119,7 @@ BuildRequires:  objectweb-asm
 BuildRequires:  snakeyaml
 BuildRequires:  yydebug
 BuildRequires:  yecht
+BuildRequires:	maven-local
 
 # these normally get installed as gems during the test process
 # TODO: create a condition to be able to test with system gems
