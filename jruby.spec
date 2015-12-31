@@ -57,7 +57,7 @@
 
 Name:           jruby
 Version:        1.7.19
-Release:        %{?preminorver:0.}%{release}%{?preminorver:.%{preminorver}}%{?dist}.1
+Release:        %{?preminorver:0.}%{release}%{?preminorver:.%{preminorver}}%{?dist}.2
 Summary:        Pure Java implementation of the Ruby interpreter
 Group:          Development/Ruby
 # (CPL or GPLv2+ or LGPLv2+) - JRuby itself
