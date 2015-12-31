@@ -1,1 +1,3 @@
 addFilter("E: devel-file-in-non-devel-package")
+addFilter("E: world-writable")
+addFilter("E: non-standard-dir-perm")
