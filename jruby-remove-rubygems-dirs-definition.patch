@@ -1,6 +1,8 @@
---- rubygems/defaults/jruby.rb.orig	2012-10-04 14:00:24.527540649 +0200
-+++ rubygems/defaults/jruby.rb	2012-10-04 14:01:00.880408183 +0200
-@@ -22,25 +22,6 @@
+diff --git a/lib/ruby/shared/rubygems/defaults/jruby.rb b/lib/ruby/shared/rubygems/defaults/jruby.rb
+index 0fa6467..b555b0f 100644
+--- a/lib/ruby/shared/rubygems/defaults/jruby.rb
++++ b/lib/ruby/shared/rubygems/defaults/jruby.rb
+@@ -36,25 +36,6 @@ module Gem
      end
    end
  

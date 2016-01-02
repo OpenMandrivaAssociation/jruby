@@ -1,22 +1,13 @@
---- bin/jruby.bash.orig	2014-08-13 22:44:03.062933824 +0000
-+++ bin/jruby.bash	2014-08-13 22:47:23.568005193 +0000
-@@ -308,7 +308,7 @@ ruby_args=("${ruby_args[@]}" "$@")
+diff --git a/bin/jruby.bash b/bin/jruby.bash
+index eb5264d..4816a28 100755
+--- a/bin/jruby.bash
++++ b/bin/jruby.bash
+@@ -338,7 +338,7 @@ ruby_args=("${ruby_args[@]}" "$@")
  # Put the ruby_args back into the position arguments $1, $2 etc
  set -- "${ruby_args[@]}"
  
 -JAVA_OPTS="$JAVA_OPTS $JAVA_MEM $JAVA_MEM_MIN $JAVA_STACK"
 +JAVA_OPTS="$FEDORA_JAVA_OPTS $JAVA_OPTS $JAVA_MEM $JAVA_MEM_MIN $JAVA_STACK"
- 
- JFFI_OPTS="-Djffi.boot.library.path=$JRUBY_HOME/lib/jni"
- 
---- bin/jruby.sh.orig	2014-08-13 22:44:03.062933824 +0000
-+++ bin/jruby.sh	2014-08-13 22:46:51.427192460 +0000
-@@ -256,7 +256,7 @@ ruby_args="${ruby_args} $@"
- # Put the ruby_args back into the position arguments $1, $2 etc
- set -- "${ruby_args}"
- 
--JAVA_OPTS="$JAVA_OPTS $JAVA_VM $JAVA_MEM $JAVA_STACK"
-+JAVA_OPTS="$FEDORA_JAVA_OPTS $JAVA_OPTS $JAVA_VM $JAVA_MEM $JAVA_STACK"
  
  JFFI_OPTS="-Djffi.boot.library.path=$JRUBY_HOME/lib/jni"
  

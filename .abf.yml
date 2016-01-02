@@ -1,5 +1,5 @@
 removed_sources:
+  jruby-src-1.7.19.tar.gz: 7740f8e03fdcbc257d3f606926a65c79c37795ba
   jruby-src-1.7.2.tar.gz: 63ad35f735c4dd9b53a74a95e8e7cfd9a3cc5909
 sources:
-  jruby-src-1.7.19.tar.gz: 7740f8e03fdcbc257d3f606926a65c79c37795ba
-  olabini-yecht-0.0.2-0-g6009fd7.tar.gz: e07ba337dee38ad6f71fdd8ed2b20adbd0eab378
+  jruby-src-1.7.22.tar.gz: 05c9141f2cfa3b3ab1809c78fc8ded4c0a34445f
