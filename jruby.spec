@@ -12,8 +12,8 @@
 %global rubygems_dir %{_datadir}/rubygems
 
 Name:           jruby
-Version:        1.7.22
-Release:        1.1
+Version:        9.2.0.0
+Release:        1
 Summary:        Pure Java implementation of the Ruby interpreter
 # (CPL or GPLv2+ or LGPLv2+) - JRuby itself
 # BSD - some files under lib/ruby/shared
@@ -21,15 +21,13 @@ Summary:        Pure Java implementation of the Ruby interpreter
 # (BSD or Ruby) - Ruby 1.9 stdlib
 License:        (CPL or GPLv2+ or LGPLv2+) and BSD and (GPLv2 or Ruby) and (BSD or Ruby)
 URL:            http://jruby.org
-Source0:        http://jruby.org.s3.amazonaws.com/downloads/%{version}/%{name}-src-%{version}.tar.gz
+Source0:        https://repo1.maven.org/maven2/org/jruby/jruby-dist/%{version}/jruby-dist-%{version}-src.zip
 
 # Adds all the required jars to boot classpath
 Patch0:         jruby-add-classpath-to-start-script.patch
 # Adds $FEDORA_JAVA_OPTS, that is dynamically replaced by Fedora specific paths from the specfile
 # This way we can use macros for the actual locations and not hardcode them in the patch
 Patch1:         jruby-executable-add-fedora-java-opts-stub.patch
-# upstream jline JAR bundles jansi, we need to include it explicitly in Fedora
-Patch2:         jruby-include-unbundled-jansi.patch
 # We don't want any directories defined by JRuby, everything is taken from Fedora's rubygems
 Patch3:         jruby-remove-rubygems-dirs-definition.patch
 # Port to latest snakeyaml
@@ -49,6 +47,7 @@ BuildRequires:  mvn(com.github.jnr:jnr-posix)
 BuildRequires:  mvn(com.github.jnr:jnr-unixsocket)
 BuildRequires:  mvn(com.github.jnr:jnr-x86asm)
 BuildRequires:  mvn(com.headius:coro-mock)
+BuildRequires:  mvn(com.headius:unsafe-mock)
 BuildRequires:  mvn(com.headius:invokebinder)
 BuildRequires:  mvn(com.headius:options)
 BuildRequires:  mvn(com.jcraft:jzlib)
@@ -111,13 +110,7 @@ Summary:        Javadoc for %{name}
 Javadoc for %{name}.
 
 %prep
-%setup -q
-
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%autosetup -p1
 
 # delete windows specific files
 find -name "*.exe" -delete
