@@ -13,7 +13,7 @@
 
 Name:           jruby
 Version:        9.2.0.0
-Release:        1
+Release:        2
 Summary:        Pure Java implementation of the Ruby interpreter
 # (CPL or GPLv2+ or LGPLv2+) - JRuby itself
 # BSD - some files under lib/ruby/shared
