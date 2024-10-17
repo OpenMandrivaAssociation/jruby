@@ -20,7 +20,7 @@ Summary:        Pure Java implementation of the Ruby interpreter
 # (GPLv2 or Ruby) - Ruby 1.8 stdlib
 # (BSD or Ruby) - Ruby 1.9 stdlib
 License:        (CPL or GPLv2+ or LGPLv2+) and BSD and (GPLv2 or Ruby) and (BSD or Ruby)
-URL:            http://jruby.org
+URL:            https://jruby.org
 Source0:        https://repo1.maven.org/maven2/org/jruby/jruby-dist/%{version}/jruby-dist-%{version}-src.zip
 
 # Adds all the required jars to boot classpath
